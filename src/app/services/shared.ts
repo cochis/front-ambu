@@ -23,6 +23,34 @@ export class SharedService {
     console.log('set ' + key);
     sessionStorage.setItem(key, JSON.stringify(value));
   }
+  obtenerClave(tipo, cantidad) {
+
+    var hoy = new Date();
+    var yy = hoy.getFullYear();
+    var mm = hoy.getMonth() + 1;
+    var year = yy.toString();
+    year = year.substr(2, 4);
+    var mounth = mm.toString();
+    if (mounth.length == 1) {
+      mounth = '0' + mounth;
+    }
+    var clv = tipo;
+
+    var next = 0;
+    var rdm = this.ramdom();
+
+
+    if (cantidad == 5) {
+      var busqueda =  clv + '-'+ rdm.toUpperCase();
+    
+    } else  {
+      var busqueda = year + mounth + clv + rdm.toUpperCase();
+    }
+
+
+    return busqueda;
+
+  }
 
   ramdom() {
     var result = '';

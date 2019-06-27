@@ -2,16 +2,16 @@
     <div class="col-2" style="float: left !important; margin-top: 0px !important; margin-bottom: 90px !important;">
         <app-menu></app-menu>
     </div>
-    <div class=" col-10 " style="float: right !important; margin-bottom: -90px !important;" *ngIf="empleados">
+    <div class=" col-10 " style="float: right !important; " *ngIf="empleados">
         <H1>Empleados</H1>
 
 
-        <p-table #dt [columns]="cols" [value]="empleados" selectionMode="multiple" [(selection)]="selectedEmpleados" [paginator]="true" [rows]="100">
+        <p-table #dt [columns]="cols" [value]="empleados" selectionMode="multiple" [(selection)]="selectedEmpleados" [paginator]="true" [rows]="10">
             <ng-template pTemplate="caption">
-                <!-- <div style="text-align: right">
+                <div style="text-align: right">
                     <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
-                    <input type="text" pInputText size="50" placeholder="Busqueda" (input)="dt.filterGlobal($event.target.value, 'empleados')" style="width:auto">
-                </div> -->
+                    <input type="text" pInputText size="50" placeholder="Busqueda" (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
+                </div>
                 <div class="ui-helper-clearfix">
                     <button type="button" pButton icon="fa fa-file" iconPos="left" label="Descargar todos" (click)="dt.exportCSV()" style="float:left"></button>
                     <button type="button" pButton icon="fa fa-file" iconPos="left" label="Descargar seleccion" (click)="dt.exportCSV({selectionOnly:true})" style="float:right"></button>

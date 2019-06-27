@@ -1,0 +1,67 @@
+<div class="container-fluid">
+    <div class="col-2" style="float: left !important; margin-top: -90px !important; margin-bottom: 90px !important;">
+        <app-menu></app-menu>
+    </div>
+    <div class=" col-10 " style="float: right !important; margin-top: -90px !important; margin-bottom: 90px !important;">
+        <H1>Registrar Sitio</H1>
+        <div *ngIf="errores" class="alert alert-danger  alert-dismissible fade show">
+            <strong>{{er}}</strong>
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+        </div>
+        <form #createForm="ngForm" class="contactForm title" style="background: none !important" *ngIf="sitio">
+            <div class="form-group">
+                <label for="nombre">Nombre</label>
+                <input type="text" class="form-control" name="nombre" id="nombre" placeholder="Ingresa el nombre de la sitio" #nombre="ngModel" [(ngModel)]="sitio.nombre" pattern="[a-zA-Z ]+" required/>
+                <br>
+                <p-message *ngIf="nombre.touched && !nombre.valid" severity="error" text="El  campo de nombre no es valido"></p-message>
+
+            </div>
+            <div class="form-group" *ngIf="nombre.valid">
+                <label for="clvSitio">Clave de sitio</label>
+                <input type="text" class="form-control" name="clvSitio" id="clvSitio" placeholder="Ingresa la clave del sitio" #clvSitio="ngModel" [(ngModel)]="sitio.clvSitio" [minLength]="5" [maxLength]="5" readonly required/>
+                <br>
+                <p-message *ngIf="clvSitio.touched && !clvSitio.valid" severity="error" text="El  campo de clave del sitio no es valido"></p-message>
+
+            </div>
+            <div class="form-group">
+                <label for="direccion">Direccion</label>
+                <input type="text" class="form-control" name="direccion" id="direccion" placeholder="Ingresa la direccion del sitio" #direccion="ngModel" [(ngModel)]="sitio.direccion" pattern="[a-zA-Z0-9 ]+" required/>
+                <br>
+                <p-message *ngIf="direccion.touched && !direccion.valid" severity="error" text="El  campo de direccion del sitio no es valido"></p-message>
+
+            </div>
+            <div class="form-group">
+                <label for="telefono">Telefono</label>
+                <input type="text" class="form-control" name="telefono" id="telefono" placeholder="Ingresa el telefono del sitio" #telefono="ngModel" [(ngModel)]="sitio.telefono" pattern="[0-9 ]+" required/>
+                <br>
+                <p-message *ngIf="telefono.touched && !telefono.valid" severity="error" text="El  campo de telefono del sitio no es valido"></p-message>
+
+            </div>
+
+
+
+            <div class="col-12 text-center">
+                <button type="button" class="btnAct" (click)="confirmacion()" [disabled]="!createForm.valid" pButton icon="pi pi-info-circle" label="Registrar"></button>
+
+                <button type="button" class="btnCan" [routerLink]="['/intra/sitios']" pButton icon="pi pi-info-circle" label="Salir"></button>
+
+            </div>
+
+            <!-- <div class="col-xs-12">
+            <button class="btn btn-primary" (click)="onSubmit(createForm)" [disabled]="!createForm.valid">Enviar</button>
+            <a class="btn btn-danger">Salir</a>
+        </div> -->
+        </form>
+        <p *ngIf="!sitio" class="text-center" style="margin-top: 100px !important">
+            <p-progressSpinner></p-progressSpinner>
+        </p>
+    </div>
+
+</div>
+<p-dialog header="Registrar" [(visible)]="ingresar" [modal]="true" [responsive]="true" [style]="{width: '350px', minWidth: '200px'}" [minY]="70" [maximizable]="true" [baseZIndex]="10000">
+    <p>¿Desea ingrear el registro?</p>
+    <p-footer>
+        <button type="button" pButton icon="pi pi-check" (click)="onSubmit(sitio)" label="Registrar"></button>
+        <button type="button" pButton icon="pi pi-close" (click)="actualizar=false" label="Salir" class="ui-button-secondary"></button>
+    </p-footer>
+</p-dialog>

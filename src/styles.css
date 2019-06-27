@@ -223,7 +223,6 @@ i {
 
 .sub-menu1 {
     transform: translate(-40px, -10px);
-    /* transform: translateX(-40px); */
     width: 112%;
     cursor: pointer;
     color: #ffffff;

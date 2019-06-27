@@ -80,6 +80,28 @@ import { RegistrosComponent } from './components/intra/registros/registros/regis
 import { RegistroDetailComponent } from './components/intra/registros/registro-detail/registro-detail.component';
 import { RegistroViewComponent } from './components/intra/registros/registro-view/registro-view.component';
 import { RegistroJoinComponent } from './components/intra/registros/registro-join/registro-join.component';
+import { LocalidadesComponent } from './components/intra/localidades/localidades/localidades.component';
+import { LocalidadViewComponent } from './components/intra/localidades/localidad-view/localidad-view.component';
+import { LocalidadJoinComponent } from './components/intra/localidades/localidad-join/localidad-join.component';
+import { LocalidadDetailComponent } from './components/intra/localidades/localidad-detail/localidad-detail.component';
+import { SitiosComponent } from './components/intra/sitios/sitios/sitios.component';
+import { SitiosDetailComponent } from './components/intra/sitios/sitios-detail/sitios-detail.component';
+import { SitiosJoinComponent } from './components/intra/sitios/sitios-join/sitios-join.component';
+import { SitiosViewComponent } from './components/intra/sitios/sitios-view/sitios-view.component';
+import { ClientesComponent } from './components/intra/clientes/clientes/clientes.component';
+import { ClienteViewComponent } from './components/intra/clientes/cliente-view/cliente-view.component';
+import { ClienteJoinComponent } from './components/intra/clientes/cliente-join/cliente-join.component';
+import { ClienteDetailComponent } from './components/intra/clientes/cliente-detail/cliente-detail.component';
+import { FormulariosRegistroComponent } from './components/intra/catalogos/formularios-registro/formularios-registro/formularios-registro.component';
+import { FormulariosRegistroDetailComponent } from './components/intra/catalogos/formularios-registro/formularios-registro-detail/formularios-registro-detail.component';
+import { FormulariosRegistroViewComponent } from './components/intra/catalogos/formularios-registro/formularios-registro-view/formularios-registro-view.component';
+import { FormulariosRegistroJoinComponent } from './components/intra/catalogos/formularios-registro/formularios-registro-join/formularios-registro-join.component';
+import { TipoCamposComponent } from './components/intra/catalogos/tipo-campos/tipo-campos/tipo-campos.component';
+import { TipoCampoDetailComponent } from './components/intra/catalogos/tipo-campos/tipo-campo-detail/tipo-campo-detail.component';
+import { TipoCampoViewComponent } from './components/intra/catalogos/tipo-campos/tipo-campo-view/tipo-campo-view.component';
+import { TipoCampoJoinComponent } from './components/intra/catalogos/tipo-campos/tipo-campo-join/tipo-campo-join.component';
+
+
 
 
 
@@ -122,7 +144,27 @@ import { RegistroJoinComponent } from './components/intra/registros/registro-joi
     RegistrosComponent,
     RegistroDetailComponent,
     RegistroViewComponent,
-    RegistroJoinComponent
+    RegistroJoinComponent,
+    LocalidadesComponent,
+    LocalidadViewComponent,
+    LocalidadJoinComponent,
+    LocalidadDetailComponent,
+    SitiosComponent,
+    SitiosDetailComponent,
+    SitiosJoinComponent,
+    SitiosViewComponent,
+    ClientesComponent,
+    ClienteViewComponent,
+    ClienteJoinComponent,
+    ClienteDetailComponent,
+    FormulariosRegistroComponent,
+    FormulariosRegistroDetailComponent,
+    FormulariosRegistroViewComponent,
+    FormulariosRegistroJoinComponent,
+    TipoCamposComponent,
+    TipoCampoDetailComponent,
+    TipoCampoViewComponent,
+    TipoCampoJoinComponent
     
   ], 
   imports: [

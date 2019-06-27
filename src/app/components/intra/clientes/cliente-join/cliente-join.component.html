@@ -1,0 +1,67 @@
+<div class="container-fluid">
+    <div class="col-2" style="float: left !important; margin-top: -90px !important; margin-bottom: 90px !important;">
+        <app-menu></app-menu>
+    </div>
+    <div class=" col-10 " style="float: right !important; margin-top: -90px !important; margin-bottom: 90px !important;">
+        <H1>Registrar Cliente</H1>
+        <div *ngIf="errores" class="alert alert-danger  alert-dismissible fade show">
+            <strong>{{er}}</strong>
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+        </div>
+        <form #createForm="ngForm" class="contactForm title" style="background: none !important" *ngIf="cliente">
+            <div class="form-group">
+                <label for="nombre">Nombre</label>
+                <input type="text" class="form-control" name="nombre" id="nombre" placeholder="Ingresa el nombre de la cliente" #nombre="ngModel" [(ngModel)]="cliente.nombre" required/>
+                <br>
+                <p-message *ngIf="nombre.touched && !nombre.valid" severity="error" text="El  campo de nombre no es valido"></p-message>
+
+            </div>
+            <div class="form-group" *ngIf="nombre.valid">
+                <label for="clvCliente">Clave de cliente</label>
+                <input type="text" class="form-control" name="clvCliente" id="clvCliente" placeholder="Ingresa la clave de la cliente" #clvCliente="ngModel" [(ngModel)]="cliente.clvCliente" [minLength]="5" [maxLength]="5" required/>
+                <br>
+                <p-message *ngIf="clvCliente.touched && !clvCliente.valid" severity="error" text="El  campo de clave de cliente no es valido"></p-message>
+
+            </div>
+            <div class="form-group">
+                <label for="direccion">Direccion</label>
+                <textarea class="form-control" rows="5" name="direccion" id="direccion" placeholder="Ingresa la direccion del cliente" #direccion="ngModel" [(ngModel)]="cliente.direccion" required></textarea>
+                <br>
+                <p-message *ngIf="direccion.touched && !direccion.valid" severity="error" text="El  campo de direccion de cliente no es valido"></p-message>
+
+            </div>
+            <div class="form-group">
+                <label for="telefono">Telefono</label>
+                <input type="text" class="form-control" name="telefono" id="telefono" placeholder="Ingresa el telefono del cliente" #telefono="ngModel" [(ngModel)]="cliente.telefono" pattern="[0-9]+" required/>
+                <br>
+                <p-message *ngIf="telefono.touched && !telefono.valid" severity="error" text="El  campo de telefono del cliente no es valido"></p-message>
+
+            </div>
+
+
+
+            <div class="col-12 text-center">
+                <button type="button" class="btnAct" (click)="confirmacion()" [disabled]="!createForm.valid" pButton icon="pi pi-info-circle" label="Registrar"></button>
+
+                <button type="button" class="btnCan" [routerLink]="['/intra/clientes']" pButton icon="pi pi-info-circle" label="Salir"></button>
+
+            </div>
+
+            <!-- <div class="col-xs-12">
+              <button class="btn btn-primary" (click)="onSubmit(createForm)" [disabled]="!createForm.valid">Enviar</button>
+              <a class="btn btn-danger">Salir</a>
+          </div> -->
+        </form>
+        <p *ngIf="!cliente" class="text-center" style="margin-top: 100px !important">
+            <p-progressSpinner></p-progressSpinner>
+        </p>
+    </div>
+
+</div>
+<p-dialog header="Registrar" [(visible)]="ingresar" [modal]="true" [responsive]="true" [style]="{width: '350px', minWidth: '200px'}" [minY]="70" [maximizable]="true" [baseZIndex]="10000">
+    <p>¿Desea ingrear el registro?</p>
+    <p-footer>
+        <button type="button" pButton icon="pi pi-check" (click)="onSubmit(cliente)" label="Registrar"></button>
+        <button type="button" pButton icon="pi pi-close" (click)="actualizar=false" label="Salir" class="ui-button-secondary"></button>
+    </p-footer>
+</p-dialog>

@@ -26,15 +26,15 @@
             <li id="sitios">
                 <a class=" sub-menu1 fa fa-user"><label class="pointer"><input type="checkbox" id="sitios"   value="first_checkbox" routerLinkActive="active"> Sitios</label></a>
                 <ul>
-                    <li class=" sub-menu2 fa fa-user" [routerLink]="['/intra/home']" *ngIf="permisos?.administrativo?.sitios?.read">Mostrar</li>
-                    <li class=" sub-menu2 fa fa-user" [routerLink]="['/intra/home']" *ngIf="permisos?.administrativo?.sitios?.create">Registrar</li>
+                    <li class=" sub-menu2 fa fa-user" [routerLink]="['/intra/sitios']" *ngIf="permisos?.administrativo?.sitios?.read">Mostrar</li>
+                    <li class=" sub-menu2 fa fa-user" [routerLink]="['/intra/sitios/registrar']" *ngIf="permisos?.administrativo?.sitios?.create">Registrar</li>
                 </ul>
             </li>
             <li id="localidades">
                 <a class="pointe sub-menu1 fa fa-user"><label class="pointer"><input type="checkbox" id="localidades"   value="first_checkbox" routerLinkActive="active"> Localidades</label></a>
                 <ul>
-                    <li class=" sub-menu2 fa fa-user" [routerLink]="['/intra/home']" *ngIf="permisos?.administrativo?.localidades?.read">Mostrar</li>
-                    <li class=" sub-menu2 fa fa-user" [routerLink]="['/intra/home']" *ngIf="permisos?.administrativo?.localidades?.create">Registrar</li>
+                    <li class=" sub-menu2 fa fa-user" [routerLink]="['/intra/localidades']" *ngIf="permisos?.administrativo?.localidades?.read">Mostrar</li>
+                    <li class=" sub-menu2 fa fa-user" [routerLink]="['/intra/localidades/registrar']" *ngIf="permisos?.administrativo?.localidades?.create">Registrar</li>
                 </ul>
             </li>
         </ul>
@@ -83,8 +83,8 @@
             <li id="clientes">
                 <a class="sub-menu1 fa fa-user "><label class="pointer"><input type="checkbox" id="clientes"   value="first_checkbox" routerLinkActive="active" [routerLink]="['/intra/home']" > Clientes</label></a>
                 <ul>
-                    <li class=" sub-menu2 fa fa-user" [routerLink]="['/intra/home']" *ngIf="permisos?.clientesMembresias?.clientes?.read">Mostrar</li>
-                    <li class=" sub-menu2 fa fa-user" [routerLink]="['/intra/home']" *ngIf="permisos?.clientesMembresias?.clientes?.create">Registrar</li>
+                    <li class=" sub-menu2 fa fa-user" [routerLink]="['/intra/clientes']" *ngIf="permisos?.clientesMembresias?.clientes?.read">Mostrar</li>
+                    <li class=" sub-menu2 fa fa-user" [routerLink]="['/intra/clientes/registrar']" *ngIf="permisos?.clientesMembresias?.clientes?.create">Registrar</li>
                 </ul>
             </li>
             <li id="membresias">

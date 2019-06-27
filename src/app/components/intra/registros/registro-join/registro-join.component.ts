@@ -7,6 +7,9 @@ import { Empleado } from '../../../../models/empleado';
 import { EmpleadoService } from '../../../../services/empleado.service';
 import { AmbulanciasService } from '../../../../services/ambulanciasService';
 import { Ambulancia } from '../../../../models/ambulancia';
+import { Cliente } from '../../../../models/cliente';
+import { clientesService } from '../../../../services/clientesService.service';
+
 
 @Component({
   selector: 'app-registro-join',
@@ -18,6 +21,8 @@ export class RegistroJoinComponent implements OnInit, OnChanges {
   public empleados: Empleado[];
   public ambulancia: Ambulancia;
   public ambulancias: Ambulancia[];
+  public cliente: Cliente;
+  public clientes: Cliente[];
   public momentoActual = new Date()
   public hora: any;
   public minuto: any;
@@ -47,25 +52,36 @@ export class RegistroJoinComponent implements OnInit, OnChanges {
     private _route: ActivatedRoute,
     private _router: Router,
     private _empleadoService: EmpleadoService,
-    private _ambulanciasService: AmbulanciasService) {
-// tslint:disable-next-line: max-line-length
+    private _ambulanciasService: AmbulanciasService,
+    private _clienteService: clientesService) {
+    // tslint:disable-next-line: max-line-length
     this.registro = new Registro(0, '', '', '', '', '', '', 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', false, '');
     this.empleado = new Empleado(0, '', '', '', '', '', '', '', '', false, '', '', '', '');
   }
 
   ngOnInit() {
-    this._empleadoService.getEmpleados().subscribe(data => {
+    this.registro.clvRegistro = this._sharedService.obtenerClave('RG', 8);
+    this.registro.clvRegistro =  this.registro.clvRegistro + '-' + this.registro.numeroFolio;
+    this._clienteService.getClientesActivo().subscribe(data => {
+      this.clientes = data;
+      console.log(data);
+    },
+      error => {
+        console.log(<any>error)
+      });
+    this._empleadoService.getEmpleadosActivo().subscribe(data => {
       this.empleados = data;
       console.log(data);
     });
-    this._ambulanciasService.getAmbulancias().subscribe(data => {
+    this._ambulanciasService.getAmbulanciasActivo().subscribe(data => {
       this.ambulancias = data;
       console.log(data);
     });
     this._registroService.ultimo().subscribe(response => {
       console.log(response.idRegistro + 1);
       this.registro.numeroFolio = response.idRegistro + 1;
-
+      this.registro.clvRegistro = this._sharedService.obtenerClave('RG', 8);
+      this.registro.clvRegistro =  this.registro.clvRegistro + '-' + this.registro.numeroFolio  ;
       this.horaSalida = setInterval(function () {
         this.momentoActual = new Date()
         this.hora = this.momentoActual.getHours();

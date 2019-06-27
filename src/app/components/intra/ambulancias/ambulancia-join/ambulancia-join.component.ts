@@ -12,6 +12,8 @@ export class AmbulanciaJoinComponent implements OnInit {
   public ambulancia: Ambulancia;
   msgs: any[];
   ingresar: Boolean = false;
+  errores:boolean = false;
+  er:any;
   constructor(private _ambulanciasService: AmbulanciasService,
     private _sharedService: SharedService,
     private _route: ActivatedRoute,
@@ -20,11 +22,20 @@ export class AmbulanciaJoinComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.ambulancia.clvAmbulancia = this._sharedService.obtenerClave('AM', 5);
   }
   onSubmit(form) {
-    this._ambulanciasService.postAmbulancia(this.ambulancia).subscribe(res => {
-      console.log(res);
-      this._router.navigate(['/intra/ambulancias']);
+    this._ambulanciasService.postAmbulancia(this.ambulancia).subscribe(data => {
+      if (data.error) {
+        this.ingresar = false;  
+        this.errores = true;
+        this.er = data.error;
+        console.log(this.er);
+       
+      } else {
+        this._router.navigate(['/intra/ambulancias']);
+      }
+     
     },
       error => {
         console.log(<any>error);

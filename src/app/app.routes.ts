@@ -31,6 +31,18 @@ import { RegistroDetailComponent } from './components/intra/registros/registro-d
 import { RegistroViewComponent } from './components/intra/registros/registro-view/registro-view.component';
 import { RegistroJoinComponent } from './components/intra/registros/registro-join/registro-join.component';
 import { RegistrosComponent } from './components/intra/registros/registros/registros.component';
+import { LocalidadesComponent } from './components/intra/localidades/localidades/localidades.component';
+import { LocalidadViewComponent } from './components/intra/localidades/localidad-view/localidad-view.component';
+import { LocalidadJoinComponent } from './components/intra/localidades/localidad-join/localidad-join.component';
+import { LocalidadDetailComponent } from './components/intra/localidades/localidad-detail/localidad-detail.component';
+import { ClientesComponent } from './components/intra/clientes/clientes/clientes.component';
+import { ClienteDetailComponent } from './components/intra/clientes/cliente-detail/cliente-detail.component';
+import { ClienteViewComponent } from './components/intra/clientes/cliente-view/cliente-view.component';
+import { ClienteJoinComponent } from './components/intra/clientes/cliente-join/cliente-join.component';
+import { SitiosComponent } from './components/intra/sitios/sitios/sitios.component';
+import { SitiosDetailComponent } from './components/intra/sitios/sitios-detail/sitios-detail.component';
+import { SitiosJoinComponent } from './components/intra/sitios/sitios-join/sitios-join.component';
+import { SitiosViewComponent } from './components/intra/sitios/sitios-view/sitios-view.component';
 
 const APP_ROUTES: Routes = [
   { path: 'home', component: HomeComponent },
@@ -63,6 +75,18 @@ const APP_ROUTES: Routes = [
   { path: 'intra/registros/detalle-registro/:clvRegistro', component: RegistroDetailComponent, canActivate: [AuthGuardService] },
   { path: 'intra/registros/vista-registro/:clvRegistro', component: RegistroViewComponent, canActivate: [AuthGuardService] },
   { path: 'intra/registros/registrar', component: RegistroJoinComponent, canActivate: [AuthGuardService] },
+  { path: 'intra/localidades', component: LocalidadesComponent, canActivate: [AuthGuardService] },
+  { path: 'intra/localidades/detalle-localidad/:clvLocalidad', component: LocalidadDetailComponent, canActivate: [AuthGuardService] },
+  { path: 'intra/localidades/vista-localidad/:clvLocalidad', component: LocalidadViewComponent, canActivate: [AuthGuardService] },
+  { path: 'intra/localidades/registrar', component: LocalidadJoinComponent, canActivate: [AuthGuardService] },
+  { path: 'intra/clientes', component: ClientesComponent, canActivate: [AuthGuardService] },
+  { path: 'intra/clientes/detalle-cliente/:clvCliente', component: ClienteDetailComponent, canActivate: [AuthGuardService] },
+  { path: 'intra/clientes/vista-cliente/:clvCliente', component: ClienteViewComponent, canActivate: [AuthGuardService] },
+  { path: 'intra/clientes/registrar', component: ClienteJoinComponent, canActivate: [AuthGuardService] },
+  { path: 'intra/sitios', component: SitiosComponent, canActivate: [AuthGuardService] },
+  { path: 'intra/sitios/detalle-sitio/:clvSitio', component: SitiosDetailComponent, canActivate: [AuthGuardService] },
+  { path: 'intra/sitios/vista-sitio/:clvSitio', component: SitiosViewComponent, canActivate: [AuthGuardService] },
+  { path: 'intra/sitios/registrar', component: SitiosJoinComponent, canActivate: [AuthGuardService] },
 
   //   { path: 'buscar/:termino', component: BuscadorComponent },
   { path: '**', pathMatch: 'full', redirectTo: 'home' }

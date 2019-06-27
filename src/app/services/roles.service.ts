@@ -22,6 +22,7 @@ export class RolesService {
     var token = this._sharedService.getLocal('token');
     var headers = new HttpHeaders().set('Authorization', token);
     const slide = 'roles/';
+    console.log(this.url + slide); 
     return this._http.get(this.url + slide, { headers: headers });
   }
   getRolByClvRol(clvRol): Observable<any> {
@@ -29,8 +30,6 @@ export class RolesService {
     var token = this._sharedService.getLocal('token');
     var headers = new HttpHeaders().set('Authorization', token);
     const slide = 'roles/' + clvRol;
-    console.log('entro');
-    console.log(this.url + slide);
     return  this._http.get(this.url + slide, { headers: headers });
   }
 }

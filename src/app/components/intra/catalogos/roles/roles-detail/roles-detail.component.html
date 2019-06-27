@@ -43,10 +43,10 @@
 
             </div>
 
-            <div class="col-xs-12">
-                <!-- [disabled]="!contactForm.form.valid" Button -->
-                <a class="btn btn-primary" (click)="onSubmit(updateForm)">Enviar</a>
-                <!-- <button type="submit" id="submit" name="submit" pButton label="Enviar" class="btn btn-primary" [disabled]="!contactForm.form.valid"></button> -->
+            <div class="col-12 text-center">
+                <button type="button" class="btnAct" (click)="confirmacion()" [disabled]="!updateForm.valid" pButton icon="pi pi-info-circle" label="Actualizar"></button>
+
+                <button type="button" class="btnCan" [routerLink]="['/intra/empleados']" pButton icon="pi pi-info-circle" label="Salir"></button>
 
             </div>
 
@@ -57,3 +57,10 @@
 
     </div>
 </div>
+<p-dialog header="Actualizar" [(visible)]="actualizar" [modal]="true" [responsive]="true" [style]="{width: '350px', minWidth: '200px'}" [minY]="70" [maximizable]="true" [baseZIndex]="10000">
+    <p>¿Desea actualizar el registro?</p>
+    <p-footer>
+        <button type="button" pButton icon="pi pi-check" (click)="onSubmit(updateForm)" label="Actualizar"></button>
+        <button type="button" pButton icon="pi pi-close" (click)="actualizar=false" label="Salir" class="ui-button-secondary"></button>
+    </p-footer>
+</p-dialog>

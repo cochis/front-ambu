@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges } from '@angular/core';
 import { Ambulancia } from '../../../models/ambulancia';
 import { AmbulanciasService } from '../../../services/ambulanciasService';
 import { SharedService } from '../../../services/shared';
@@ -7,7 +7,7 @@ import { SharedService } from '../../../services/shared';
   selector: 'app-ambulancias',
   templateUrl: './ambulancias.component.html'
 })
-export class AmbulanciasComponent implements OnInit {
+export class AmbulanciasComponent implements OnInit, OnChanges {
   window: any;
   ambulancia: Ambulancia;
   ambulancias: Ambulancia[];
@@ -16,18 +16,17 @@ export class AmbulanciasComponent implements OnInit {
   permisos: any;
   desAct: Boolean = false;
   cambio: any;
-  constructor( private _ambulanciasService: AmbulanciasService,
-               private _sharedService: SharedService) { }
+  constructor(private _ambulanciasService: AmbulanciasService,
+    private _sharedService: SharedService) { }
 
   ngOnInit() {
     this.window = window.scroll(0, 0);
-    this._ambulanciasService.getAmbulancias().subscribe(data=> {
+    this._ambulanciasService.getAmbulancias().subscribe(data => {
       this.ambulancias = data;
-      console.log(this.ambulancias);
     },
-    error=> {
-      console.log(<any>error);
-    });
+      error => {
+        console.log(<any>error);
+      });
     this.cols = [
       { field: 'idAmbulancia', header: 'Id' },
       { field: 'nombre', header: 'Nombre' },
@@ -40,10 +39,10 @@ export class AmbulanciasComponent implements OnInit {
       { field: 'ultimaActualizacion', header: 'Ultima Actualizacion' },
       { field: 'fechaCreacion', header: 'fecha de creacion' }
     ];
-    
+
   }
   ngOnChanges() {
-    
+
     this._ambulanciasService.getAmbulancias().subscribe(data => {
       // console.log(data);
       this.ambulancias = data;
@@ -51,7 +50,7 @@ export class AmbulanciasComponent implements OnInit {
       err => {
         console.log(<any>err);
       });
-    
+
 
   }
   cambiarEstado(cambio) {
@@ -74,12 +73,14 @@ export class AmbulanciasComponent implements OnInit {
     }
 
   }
-  desactivar(estado,clvAmbulancia,ambulancia) {
-    this.cambio = { 'estado': estado,
-                    'clvAmbulancia' : clvAmbulancia,
-                    'ambulancia': ambulancia};
+  desactivar(estado, clvAmbulancia, ambulancia) {
+    this.cambio = {
+      'estado': estado,
+      'clvAmbulancia': clvAmbulancia,
+      'ambulancia': ambulancia
+    };
 
-   
+
     // console.log(estado + '  ' + clvEmpleado);
     this.desAct = true;
 

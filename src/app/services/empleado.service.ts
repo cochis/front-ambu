@@ -44,6 +44,13 @@ export class EmpleadoService {
     const slide = 'empleados/emple';
     return this._http.get(this.url + slide, { headers });
   }
+  getEmpleadosActivo(): Observable<any> {
+    var token = this._sharedService.getLocal('token');
+    var headers = new HttpHeaders();
+    var headers = new HttpHeaders().set('Authorization', token);
+    const slide = 'empleados/activo'; 
+    return this._http.get(this.url + slide, { headers });
+  }
   getEmpleadoByClv(clv): Observable<any> {
     var token = this._sharedService.getLocal('token');
     var headers = new HttpHeaders().set('Authorization', token);

@@ -16,17 +16,17 @@ export class RolesComponent implements OnInit {
   selectedRoles: Rol[];
   cols: any[];
   permisos: any;
+  desAct: Boolean = false;
+  cambio: any;
 
   constructor(private _rolService: RolesService,
     private _sharedService: SharedService) { }
 
   ngOnInit() {
-    this.window = window.scroll(0, 0);
     this.empleado = this._sharedService.getLocal('empleado');
     this._rolService.getRolByClvRol(this.empleado.rolEmpleado).subscribe(data => {
       this.permisos = JSON.parse(data.permisos);
       this.permisos = this.permisos.permisos;
-      // console.log(this.permisos);
 
       this._rolService.getRoles().subscribe(response => {
         this.roles = response;
@@ -55,6 +55,56 @@ export class RolesComponent implements OnInit {
       { field: 'tipo', header: 'Tipo' },
       { field: 'ultimaActualizacion', header: 'Ultima Modificacion' }
     ];
+  }
+  ngOnChanges() {
+
+    this._rolService.getRoles().subscribe(data => {
+      // console.log(data);
+      this.roles = data;
+    },
+      err => {
+        console.log(<any>err);
+      });
+
+
+  }
+  cambiarEstado(cambio) {
+    this.desAct = false;
+    console.log(cambio);
+    if (cambio.estado) {
+      console.log(cambio.rol);
+      this._rolService.activate(cambio.clvRol, cambio.rol).subscribe(data => {
+        console.log(data);
+        this.ngOnChanges();
+      },
+        error => {
+          console.log(<any>error);
+        });
+
+    } else {
+      this._rolService.desactivate(cambio.clvRol, cambio.rol).subscribe(data => {
+        console.log(data);
+        this.ngOnChanges();
+      },
+        error => {
+          console.log(<any>error);
+        });
+    }
+
+  }
+  desactivar(estado, clvRol, rol) {
+    this.cambio = {
+      'estado': estado,
+      'clvRol': clvRol,
+      'rol': rol
+    };
+
+    console.log(this.cambio);
+    // console.log(estado + '  ' + clvEmpleado);
+    this.desAct = true;
+
+
+
   }
 
 }

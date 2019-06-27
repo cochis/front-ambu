@@ -5,17 +5,19 @@ import { EmpleadoService } from '../../../../services/empleado.service';
 import { RolesService } from '../../catalogos/services/roles.service';
 import { Rol } from '../../../../models/rol';
 import { SharedService } from '../../../../services/shared';
-
 @Component({
   selector: 'app-empleado-join',
   templateUrl: './empleado-join.component.html'
 })
 export class EmpleadoJoinComponent implements OnInit {
   public empleado: Empleado;
+  
   rol: Rol;
   roles: Rol[];
   msgs: any[];
   ingresar: Boolean = false;
+  errores:boolean = false;
+  er:any;
   constructor(private _empleadoService: EmpleadoService,
     private _rolesService: RolesService,
     private _sharedService: SharedService,
@@ -28,37 +30,15 @@ export class EmpleadoJoinComponent implements OnInit {
 
   ngOnInit() {
 
-    this.empleado.clvEmpleado = this.obtenerClave();
-    this._rolesService.getRoles().subscribe(response => {
+    this.empleado.clvEmpleado = this._sharedService.obtenerClave('EM', 8);
+    console.log(this.empleado.clvEmpleado);
+    this._rolesService.getRolesActivo().subscribe(response => {
       this.roles = response;
 
     },
       error => {
-        console.log(<any> error);
+        console.log(<any>error);
       });
-  }
-
-
-
-  obtenerClave() {
-    this.rol.clvRol = 'AMD01';
-    var hoy = new Date();
-    var yy = hoy.getFullYear();
-    var mm = hoy.getMonth() + 1;
-    var year = yy.toString();
-    year = year.substr(2, 4);
-    var mounth = mm.toString();
-    if (mounth.length == 1) {
-      mounth = '0' + mounth;
-    }
-    var clvR = this.rol.clvRol.substr(0, 2);
-
-    var next = 0;
-    var rdm = this._sharedService.ramdom();
-    var busqueda = year + mounth + clvR + rdm.toUpperCase();
-
-    return busqueda;
-
   }
   onSubmit(empleado) {
     console.log(empleado);
@@ -66,16 +46,19 @@ export class EmpleadoJoinComponent implements OnInit {
       console.log(data);
       if (data.error) {
         this.ingresar = false;
+        this.errores = true;
+        this.er = data.error;
+        console.log(this.er);
        
-        console.log(data.error);
-        // this.show(data.error);
       } else {
         this._router.navigate(['/intra/empleados']);
       }
 
     });
   }
-  show(mes) {
+  
+
+  show() {
     this.msgs.push({ severity: 'info', summary: 'Info Message', detail: 'PrimeNG rocks' });
   }
 

@@ -8,10 +8,10 @@
 
         <p-table #dt [columns]="cols" [value]="ambulancias" selectionMode="multiple" [(selection)]="selectedAmbulancias" [paginator]="true" [rows]="100">
             <ng-template pTemplate="caption">
-                <!-- <div style="text-align: right">
-                  <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
-                  <input type="text" pInputText size="50" placeholder="Busqueda" (input)="dt.filterGlobal($event.target.value, 'empleados')" style="width:auto">
-              </div> -->
+                <div style="text-align: right">
+                    <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+                    <input type="text" pInputText size="50" placeholder="Busqueda" (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
+                </div>
                 <div class="ui-helper-clearfix">
                     <button type="button" pButton icon="fa fa-file" iconPos="left" label="Descargar todos" (click)="dt.exportCSV()" style="float:left"></button>
                     <button type="button" pButton icon="fa fa-file" iconPos="left" label="Descargar seleccion" (click)="dt.exportCSV({selectionOnly:true})" style="float:right"></button>

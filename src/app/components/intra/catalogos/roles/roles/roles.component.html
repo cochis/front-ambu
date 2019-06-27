@@ -13,9 +13,12 @@
             </ng-template>
             <ng-template pTemplate="header" let-columns>
                 <tr>
-                    <th *ngFor="let col of columns">
-                        {{col.header}}
-                    </th>
+                    <th>Id</th>
+                    <th>Nombre</th>
+                    <th>Clave</th>
+                    <th>Permisos</th>
+                    <th>Tipo</th>
+                    <th>Ultima actualizacion</th>
                     <th>Acciones</th>
                 </tr>
             </ng-template>
@@ -29,9 +32,6 @@
                     </td>
                     <td>
                         {{rowData.clvRol}}
-                    </td>
-                    <td>
-                        {{rowData.activo}}
                     </td>
                     <td>
                         <button [routerLink]="['/intra/catalogos/roles/permisos' , rowData.clvRol] "> 
@@ -49,9 +49,12 @@
                         {{rowData[col.field]}}
                     </td> -->
                     <td>
-                        {{permisos?.administrativo?.catalogos?.roles?.update}}
-                        <a pTooltip="Editar" tooltipPosition="top" class="pointer" [routerLink]="['/intra/catalogos/roles/detalle-rol' , rowData.clvRol] " *ngIf="permisos?.administrativo?.catalogos?.roles?.update"><i class="fas fa-edit" ></i></a>
-                        <a pTooltip="Ver" tooltipPosition="top" class="pointer" [routerLink]="['/intra/catalogos/roles/vista-rol' , rowData.clvRol] "><i class="fas fa-eye" ></i></a>
+                        <a pTooltip="Editar" tooltipPosition="top" class="pointer editar" [routerLink]="['/intra/catalogos/roles/detalle-rol' , rowData.clvRol] "><i class="fas fa-edit" ></i></a>
+                        <a pTooltip="Ver" tooltipPosition="top" class="pointer visualizar" [routerLink]="['/intra/catalogos/roles/vista-rol' , rowData.clvRol] "><i class="fas fa-eye" ></i></a>
+                        <a pTooltip="Desactivar" tooltipPosition="top" class="pointer activado" *ngIf="rowData.activo" style="color:red !important; background: none !important;" (click)="desactivar(false,rowData.clvRol,rowData)"><i class="fas fa-times-circle"></i></a>
+                        <a pTooltip="Activar" tooltipPosition="top" class="pointer desactivado" *ngIf="!rowData.activo" style="color:green !important; background: none !important;" (click)="desactivar(true,rowData.clvRol,rowData)"><i class="fas fa-check-circle"></i></a>
+
+
                         <!-- <a pTooltip="Desactivar" tooltipPosition="top" class="pointer" *ngIf="rowData.activo" style="background: none !important;" (click)="cambiarEstado(false,empleado.clvEmpledo,empleado)"><i class="fas fa-times-circle"></i></a>
                       <a pTooltip="Activar" tooltipPosition="top" class="pointer" *ngIf="!empleado.activo" style="background: none !important;" (click)="cambiarEstado(true,empleado.clvEmpledo,empleado)"><i class="fas fa-check-circle"></i></a> -->
                     </td>
@@ -63,3 +66,10 @@
         <p-progressSpinner></p-progressSpinner>
     </p>
 </div>
+<p-dialog header="Actualizar" [(visible)]="desAct" [modal]="true" [responsive]="true" [style]="{width: '350px', minWidth: '200px'}" [minY]="70" [maximizable]="true" [baseZIndex]="10000">
+    <p>¿Desea cambiar su estado?</p>
+    <p-footer>
+        <button type="button" pButton icon="pi pi-check" (click)="cambiarEstado(cambio)" label="Actualizar"></button>
+        <button type="button" pButton icon="pi pi-close" (click)="desAct=false" label="Salir" class="ui-button-secondary"></button>
+    </p-footer>
+</p-dialog>|

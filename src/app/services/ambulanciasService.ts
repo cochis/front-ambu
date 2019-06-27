@@ -24,6 +24,13 @@ export class AmbulanciasService {
     const slide = 'ambulancias/';
     return this._http.get(this.url + slide, { headers: headers });
   }
+  getAmbulanciasActivo(): Observable<any> {
+    // const params = JSON.stringify(contacto);
+    var token = this._sharedService.getLocal('token');
+    var headers = new HttpHeaders().set('Authorization', token);
+    const slide = 'ambulancias/activo';
+    return this._http.get(this.url + slide, { headers: headers });
+  }
   getAmbulanciaByClv(clvAmbulancia): Observable<any> {
     // var params = JSON.stringify(empleado.rolEmpleado);
     var token = this._sharedService.getLocal('token');
